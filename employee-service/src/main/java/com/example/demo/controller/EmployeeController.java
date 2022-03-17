@@ -4,7 +4,10 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,22 +38,32 @@ public class EmployeeController {
 	 */
 	
 	@GetMapping("/")
-	public String getStatus()
+	public ResponseEntity<String> getStatus()
 	{
-		return "employee-service is up and running on port: "+environment.getProperty("local.server.port");
+		return ResponseEntity.ok("employee-service is up and running on port: "+environment.getProperty("local.server.port"));
 	}
 
 	@PostMapping("/employees")
-	public EmployeeModel createEmployee(@RequestBody EmployeeModel employeeModel) {
+	public ResponseEntity<EmployeeModel> createEmployee(@RequestBody EmployeeModel employeeModel) {
 		log.info("insereting data into map");
-		return employeeService.createEmployee(employeeModel);
+		return ResponseEntity.status(HttpStatus.CREATED).body(employeeService.createEmployee(employeeModel));
 	}
 
 	@GetMapping("/employees")
-	public Collection<EmployeeModel> displayAllEmployees() {
+	public ResponseEntity<Collection<EmployeeModel>> displayAllEmployees() {
 		Map<Integer, EmployeeModel> map = employeeService.displayAllEmployees();
 		log.info("{}", map.keySet());
-		return map.values();
+		return ResponseEntity.ok(map.values());
+	}
+	@GetMapping("/employees/{employeeId}")
+	public ResponseEntity<EmployeeModel> findEmployee(@PathVariable("employeeId") int employeeId)
+	{
+		EmployeeModel model=employeeService.findEmployeeById(employeeId);
+		if(model==null)
+		{
+			return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).build();
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(model);
 	}
 
 }

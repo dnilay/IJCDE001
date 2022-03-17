@@ -26,4 +26,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return employeeRepository.displayAllEmployees();
 	}
 
+	@Override
+	public EmployeeModel findEmployeeById(int employeeId) {
+		// TODO Auto-generated method stub
+		return employeeRepository.findEmployeeById(employeeId);
+	}
+
 }

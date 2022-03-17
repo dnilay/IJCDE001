@@ -27,4 +27,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		return employeeMap;
 	}
 
+	@Override
+	public EmployeeModel findEmployeeById(int employeeId) {
+		EmployeeModel employeeModel=employeeMap.get(employeeId);
+		
+		return employeeModel;
+	}
+
 }

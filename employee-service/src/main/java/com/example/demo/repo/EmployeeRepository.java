@@ -9,5 +9,7 @@ public interface EmployeeRepository {
 	public EmployeeModel createEmployee(EmployeeModel employeeModel);
 
 	public Map<Integer, EmployeeModel> displayAllEmployees();
+	
+	public EmployeeModel findEmployeeById(int employeeId);
 
 }

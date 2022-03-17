@@ -10,4 +10,5 @@ public interface EmployeeService {
 	
 	public Map<Integer,EmployeeModel> displayAllEmployees();
 
+	public EmployeeModel findEmployeeById(int employeeId);
 }

@@ -24,14 +24,10 @@ public class MyProductServiceApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		/*
-		 * productRepository.save(new ProductEntity(1, "Book", 2.0,
-		 * ProductType.DAILY_NEEDS, true)); productRepository.save(new ProductEntity(2,
-		 * "Book1", 3.0, ProductType.DAILY_NEEDS, true)); productRepository.save(new
-		 * ProductEntity(3, "Book2", 4.0, ProductType.DAILY_NEEDS, true));
-		 * productRepository.save(new ProductEntity(4, "Book4", 5.0,
-		 * ProductType.DAILY_NEEDS, true));
-		 */
+		productRepository.save(new ProductEntity(1, "Book", 2.0, ProductType.DAILY_NEEDS, true));
+		productRepository.save(new ProductEntity(2, "Book1", 3.0, ProductType.DAILY_NEEDS, true));
+		productRepository.save(new ProductEntity(3, "Book2", 4.0, ProductType.DAILY_NEEDS, true));
+		productRepository.save(new ProductEntity(4, "Book4", 5.0, ProductType.DAILY_NEEDS, true));
 
 	}
 

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -16,13 +17,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserEntity createUser(UserEntity userEntity) {
 		// TODO Auto-generated method stub
+		userEntity.setUniqueId(UUID.randomUUID().toString());
 		return userRepository.save(userEntity);
 	}
 
 	@Override
 	public Optional<UserEntity> findUserByUniqueId(String uniqueId) {
 		// TODO Auto-generated method stub
-		return userRepository.findByUniqueId(uniqueId);
+		Optional<UserEntity> userEOptional=userRepository.findByUniqueId(uniqueId);
+	
+		return userEOptional;
 	}
 
 	@Override

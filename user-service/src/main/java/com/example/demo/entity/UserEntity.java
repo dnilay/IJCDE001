@@ -18,13 +18,13 @@ public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(name = "user_id")
+	@Column(name = "user_id",nullable = false,unique = true)
 	private String userId;
-	@Column(name = "first_name")
+	@Column(name = "first_name",nullable = false)
 	private String firstName;
-	@Column(name = "lastName")
+	@Column(name = "lastName",nullable = false)
 	private String lastName;
-	@Column(name = "email")
+	@Column(name = "email",nullable = false,unique = true)
 	private String email;
 	@Column(name = "encrypted_password")
 	private String encryptedPassword;

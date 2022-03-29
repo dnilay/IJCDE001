@@ -1,14 +1,9 @@
 package com.example.demo.service;
 
-import java.util.Optional;
-
-import com.example.demo.entity.UserEntity;
+import com.example.demo.dto.UserDto;
+import com.example.demo.ui.UserResponseModel;
 
 public interface UserService {
 
-	public UserEntity createUser(UserEntity userEntity);
-	
-	public Optional<UserEntity> findUserByUniqueId(String uniqueId);
-	
-	public Optional<UserEntity> findUserByEmail(String email);
+	public UserResponseModel createUser(UserDto userDto);
 }

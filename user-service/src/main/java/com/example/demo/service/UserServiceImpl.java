@@ -1,38 +1,30 @@
 package com.example.demo.service;
 
-import java.util.Optional;
-import java.util.UUID;
-
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.UserDto;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.repo.UserRepository;
+import com.example.demo.ui.UserResponseModel;
 
 import lombok.AllArgsConstructor;
+
 @Service
 @AllArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+	private final ModelMapper modelMapper;
 	private final UserRepository userRepository;
 
 	@Override
-	public UserEntity createUser(UserEntity userEntity) {
-		// TODO Auto-generated method stub
-		userEntity.setUniqueId(UUID.randomUUID().toString());
-		return userRepository.save(userEntity);
-	}
-
-	@Override
-	public Optional<UserEntity> findUserByUniqueId(String uniqueId) {
-		// TODO Auto-generated method stub
-		Optional<UserEntity> userEOptional=userRepository.findByUniqueId(uniqueId);
-	
-		return userEOptional;
-	}
-
-	@Override
-	public Optional<UserEntity> findUserByEmail(String email) {
-		// TODO Auto-generated method stub
-		return userRepository.findByEmail(email);
+	public UserResponseModel createUser(UserDto userDto) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		StringBuffer stringBuffer=new StringBuffer(userDto.getPassword());
+		UserEntity userEntity=modelMapper.map(userDto, UserEntity.class);
+		userEntity.setEncryptedPassword(stringBuffer.reverse().toString());
+		
+		return modelMapper.map(userRepository.save(userEntity), UserResponseModel.class);
 	}
 
 }

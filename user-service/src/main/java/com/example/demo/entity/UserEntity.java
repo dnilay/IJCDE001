@@ -17,13 +17,15 @@ import lombok.NoArgsConstructor;
 public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "user_id",nullable = false)
-	private int userId;
-	@Column(name = "unique_id",unique =true,nullable = false)
-	private String uniqueId;
-	@Column(name = "email",unique = true,nullable = false)
+	private int id;
+	@Column(name = "user_id")
+	private String userId;
+	@Column(name = "first_name")
+	private String firstName;
+	@Column(name = "lastName")
+	private String lastName;
+	@Column(name = "email")
 	private String email;
-	@Column(name = "password",nullable = false)
-	private String password;
-
+	@Column(name = "encrypted_password")
+	private String encryptedPassword;
 }

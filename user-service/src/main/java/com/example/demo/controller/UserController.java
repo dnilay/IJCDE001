@@ -29,6 +29,13 @@ import lombok.AllArgsConstructor;
 public class UserController {
 	private final ModelMapper modelMapper;
 	private final UserService userService;
+	private final org.springframework.core.env.Environment environment;
+
+	@GetMapping("/status")
+	public ResponseEntity<?> getStatus()
+	{
+		return ResponseEntity.ok("user-service is up and running on port: "+environment.getProperty("local.server.port"));
+	}
 
 	@PostMapping("/users")
 	public ResponseEntity<UserResponseModel> createUser(@Validated @Valid @RequestBody UserRequestModel userDetails) {
@@ -37,19 +44,18 @@ public class UserController {
 		userDto.setUserId(UUID.randomUUID().toString());
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDto));
 	}
+
 	@GetMapping("/users")
-	@ResponseStatus(code=HttpStatus.FOUND)
-	public List<UserResponseModel> getAllUsers()
-	{
-		
+	@ResponseStatus(code = HttpStatus.FOUND)
+	public List<UserResponseModel> getAllUsers() {
+
 		return userService.getAllUsers();
 	}
+
 	@GetMapping("/users/{userId}")
 	@ResponseStatus(code = HttpStatus.FOUND)
-	public UserResponseModel findUserByUserId(@PathVariable("userId") String userId)
-	{
+	public UserResponseModel findUserByUserId(@PathVariable("userId") String userId) {
 		return userService.findUserByUserId(userId);
 	}
-	
 
 }

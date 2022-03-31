@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: my-app-1-ws
+  boot:
+    admin:
+      client:
+        url:
+        - http://localhost:8888
+  zipkin:
+    base-url: http://127.0.0.1:9411
+server:
+  port: 8081
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - '*'
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:eureka@localhost:8761/eureka

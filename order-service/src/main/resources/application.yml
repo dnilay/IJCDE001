@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: order-ws
+  boot:
+    admin:
+      client:
+        url:
+        - http://localhost:8888
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: sa
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  jpa:
+    show-sql: true
+  zipkin:
+    base-url: hhttp://127.0.0.1:9411
+server:
+  port: 8082
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - '*'
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:eureka@localhost:8761/eureka
+      

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: employee-ws
+  datasource:
+    url: jdbc:mysql://3.85.134.139:3306/hr
+    username: root
+    password: root1234
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+server:
+  port: 5000

@@ -1,0 +1,13 @@
+jwt:
+  secret: c7fd16f6-c218-11ec-9d64-0242ac120002
+server:
+  port: 9090
+spring:
+  datasource:
+    password: root
+    url: jdbc:mysql://localhost:3306/hr
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
